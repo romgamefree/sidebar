@@ -1,9 +1,11 @@
+export const dynamic = "force-static"
+
 import type { MetadataRoute } from "next"
 import { getUnblockedGames } from "@/lib/game-service"
 import { siteConfig } from "@/lib/seo-utils"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const games = await getUnblockedGames()
+  const { games } = await getUnblockedGames()
 
   // Base URLs
   const baseUrls = [
