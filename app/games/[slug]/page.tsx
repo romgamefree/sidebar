@@ -8,6 +8,14 @@ import { getGameBySlug, getUnblockedGames } from "@/lib/game-service"
 import { getGameMetadata, generateGameJsonLd } from "@/lib/seo-utils"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
+// Generate static params for all game pages
+export async function generateStaticParams() {
+  const { games } = await getUnblockedGames()
+  return games.map((game) => ({
+    slug: game.slug,
+  }))
+}
+
 // Generate metadata for the game page
 export async function generateMetadata({
   params,
