@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ContactPage() {
-  const games = await getUnblockedGames()
+  const { games } = await getUnblockedGames()
 
   return (
     <SidebarProvider>

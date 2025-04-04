@@ -4,6 +4,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 import { getHomeMetadata } from "@/lib/seo-utils"
 import { getUnblockedGames } from "@/lib/game-service"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { GamesList } from "@/components/games-list"
 
 // Generate metadata for the games page
 export const metadata: Metadata = {
@@ -28,30 +29,7 @@ export default async function GamesPage() {
         <main className="flex flex-1 flex-col gap-4 p-4">
           <section>
             <h2 className="sr-only">Games Collection</h2>
-            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-              {games.map((game) => (
-                <article
-                  key={game.id}
-                  className="group flex flex-col overflow-hidden rounded-lg border transition-colors hover:border-primary"
-                >
-                  <a href={`/games/${game.slug}`} className="flex flex-col h-full">
-                    <div className="aspect-video w-full overflow-hidden bg-muted">
-                      <img
-                        src={game.banner_image}
-                        alt={`${game.title} thumbnail`}
-                        className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                        width={320}
-                        height={180}
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-4">
-                      <h3 className="font-semibold">{game.title}</h3>
-                      <p className="line-clamp-2 text-sm text-muted-foreground">{game.description}</p>
-                    </div>
-                  </a>
-                </article>
-              ))}
-            </div>
+            <GamesList initialGames={games} />
           </section>
         </main>
       </SidebarInset>

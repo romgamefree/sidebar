@@ -19,9 +19,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
-  },
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
@@ -31,6 +28,10 @@ const nextConfig = {
   basePath: '/romgamefree.github.io',
   assetPrefix: '/romgamefree.github.io/',
   trailingSlash: true,
+  images: {
+    unoptimized: true,
+    domains: ['feeds.gamepix.com'],
+  },
 }
 
 if (userConfig) {

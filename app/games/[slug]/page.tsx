@@ -10,18 +10,9 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/s
 
 // Generate static params for all game pages
 export async function generateStaticParams() {
-  let allGames: Game[] = []
-  let page = 1
-  let hasMore = true
-
-  while (hasMore) {
-    const { games, nextPage } = await getUnblockedGames(page)
-    allGames = [...allGames, ...games]
-    if (!nextPage) hasMore = false
-    page = nextPage || 1
-  }
-
-  return allGames.map((game) => ({
+  // For static export, we'll generate a limited number of pages
+  const { games } = await getUnblockedGames(1) // Only get first page
+  return games.map((game) => ({
     slug: game.slug,
   }))
 }
@@ -32,7 +23,7 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const { slug } = await params
+  const { slug } = params
   const game = await getGameBySlug(slug)
 
   if (!game) {
