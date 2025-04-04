@@ -4,14 +4,24 @@ import Script from "next/script"
 
 import { AppSidebar } from "@/components/app-sidebar"
 import { GamePlayer } from "@/components/game-player"
-import { getGameBySlug, getUnblockedGames } from "@/lib/game-service"
+import { getGameBySlug, getUnblockedGames, Game } from "@/lib/game-service"
 import { getGameMetadata, generateGameJsonLd } from "@/lib/seo-utils"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 
 // Generate static params for all game pages
 export async function generateStaticParams() {
-  const { games } = await getUnblockedGames()
-  return games.map((game) => ({
+  let allGames: Game[] = []
+  let page = 1
+  let hasMore = true
+
+  while (hasMore) {
+    const { games, nextPage } = await getUnblockedGames(page)
+    allGames = [...allGames, ...games]
+    if (!nextPage) hasMore = false
+    page = nextPage || 1
+  }
+
+  return allGames.map((game) => ({
     slug: game.slug,
   }))
 }

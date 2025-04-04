@@ -27,6 +27,10 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  output: 'export',
+  basePath: '/romgamefree.github.io',
+  assetPrefix: '/romgamefree.github.io/',
+  trailingSlash: true,
 }
 
 if (userConfig) {
