@@ -61,8 +61,9 @@ export default async function GamePage({
 }: {
   params: { slug: string }
 }) {
-  const { slug } = await params
-  const [game, allGames] = await Promise.all([getGameBySlug(slug), getUnblockedGames()])
+  const { slug } = params
+  const game = await getGameBySlug(slug)
+  const { games } = await getUnblockedGames()
 
   if (!game) {
     notFound()
@@ -79,7 +80,7 @@ export default async function GamePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <SidebarProvider>
-        <AppSidebar games={allGames} currentSlug={slug} />
+        <AppSidebar games={games} currentSlug={slug} />
         <SidebarInset>
           <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
             <SidebarTrigger className="-ml-1" />

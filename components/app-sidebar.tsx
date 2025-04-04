@@ -28,7 +28,7 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 export function AppSidebar({ games, currentSlug, ...props }: AppSidebarProps) {
   const pathname = usePathname()
-  const [filteredGames, setFilteredGames] = React.useState<Game[]>(games)
+  const [filteredGames, setFilteredGames] = React.useState<Game[]>(Array.isArray(games) ? games : [])
   const [searchActive, setSearchActive] = React.useState(false)
 
   // If no currentSlug is provided, try to extract it from the pathname
@@ -125,7 +125,7 @@ export function AppSidebar({ games, currentSlug, ...props }: AppSidebarProps) {
                         >
                           <Link href={`/games/${game.slug}`} aria-label={`Play ${game.title}`}>
                             <Image
-                              src={game.thumbnail || "/placeholder.svg"}
+                              src={game.image || "/placeholder.svg"}
                               alt={`${game.title} thumbnail`}
                               width={40}
                               height={40}

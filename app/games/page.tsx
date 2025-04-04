@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 }
 
 export default async function GamesPage() {
-  const games = await getUnblockedGames()
+  const { games } = await getUnblockedGames()
 
   return (
     <SidebarProvider>
@@ -37,7 +37,7 @@ export default async function GamesPage() {
                   <a href={`/games/${game.slug}`} className="flex flex-col h-full">
                     <div className="aspect-video w-full overflow-hidden bg-muted">
                       <img
-                        src={game.thumbnail || "/placeholder.svg"}
+                        src={game.banner_image}
                         alt={`${game.title} thumbnail`}
                         className="h-full w-full object-cover transition-transform group-hover:scale-105"
                         width={320}

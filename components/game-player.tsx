@@ -39,13 +39,12 @@ export function GamePlayer({ game }: GamePlayerProps) {
           </div>
         ) : (
           <div className="h-full w-full overflow-hidden rounded-lg bg-black">
-            {/* In a real implementation, this would be an iframe or game embed */}
-            <div className="flex h-full items-center justify-center">
-              <div className="text-center">
-                <h2 className="text-xl font-semibold text-white">{game.title} is ready to play!</h2>
-                <p className="mt-2 text-gray-300">In a real implementation, the game would be embedded here.</p>
-              </div>
-            </div>
+            <iframe
+              src={game.url}
+              className="h-full w-full"
+              allow="fullscreen"
+              title={game.title}
+            />
           </div>
         )}
       </section>
