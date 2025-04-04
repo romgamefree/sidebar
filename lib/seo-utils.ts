@@ -13,7 +13,7 @@ export type MetadataProps = {
 export const siteConfig = {
   name: "Unblocked Games Hub",
   description: "Play the best unblocked games online for free. No downloads required.",
-  url: "https://unblocked-games-hub.com", // Replace with your actual domain
+  url: "https://romgamefree.github.io/sidebar", // Replace with your actual domain
   ogImage: "/og-image.jpg", // Default OG image
 }
 
@@ -51,7 +51,7 @@ export function getGameMetadata(game: Game): MetadataProps {
       ...game.title.split(" "),
     ],
     url: `${siteConfig.url}/games/${game.slug}`,
-    ogImage: game.thumbnail,
+    ogImage: game.image,
   }
 }
 
@@ -62,7 +62,7 @@ export function generateGameJsonLd(game: Game) {
     "@type": "VideoGame",
     name: game.title,
     description: game.description,
-    image: game.thumbnail,
+    image: game.image,
     url: `${siteConfig.url}/games/${game.slug}`,
     genre: "Browser Game",
     gamePlatform: "Web Browser",
